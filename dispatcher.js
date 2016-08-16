@@ -1,7 +1,7 @@
 'use strict';
 
 var logger = require('winston'),
-	
+
 	MemoryDataStore = require('@slack/client').MemoryDataStore,
 	dataStore = new MemoryDataStore(),
 
@@ -22,7 +22,7 @@ var logger = require('winston'),
  * @return boolean
  */
 var isInitialized = function() {
-	return handlers !== undefined && handlers.length > 0;
+	return handlers !== undefined;
 }
 
 /**
@@ -38,7 +38,7 @@ var init = function (client) {
 
 	slackClient = client;
 	handlers = {};
-	
+
 	util.command.init();
 
 	commands = require(path.resolve(util.config.get('CONFIG_DIR'), 'commands'));
@@ -56,7 +56,7 @@ var init = function (client) {
  * the command entered by the user and the additional text as an array of tokens(args).
  * If no matching command is found, looks for and calls file named after the ERROR_COMMAND
  * config parameter set on initialization.
- * 
+ *
  * @param  { string } message posted by a user in Slack channel
  * @return { none }
  */
